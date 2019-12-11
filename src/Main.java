@@ -85,3 +85,40 @@ public class Main {
 }
 
 
+/*
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+
+public class Main {
+
+	 static class HandlingDataDTO {
+
+        static List<String> getData(Scanner scanner) {
+
+            List<String> inputInArrayList = new ArrayList<>();
+
+            while (scanner.hasNextLine()) {
+                // List<String> inputPerLine = new ArrayList<>();
+                Scanner lineScanner = new Scanner(scanner.nextLine());
+
+                while (lineScanner.hasNext()) {
+                    inputInArrayList.add(lineScanner.next());
+                }
+
+                lineScanner.close();
+
+            }
+
+            return inputInArrayList;
+        }
+    }
+
+	public static void main(String[] args) {
+		Scanner myObj = new Scanner(System.in);
+		List <String> data = HandlingDataDTO.getData(myObj);
+		System.out.println(data.get(2));
+	}
+}
+ */
