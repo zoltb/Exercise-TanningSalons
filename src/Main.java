@@ -6,21 +6,16 @@ public class Main {
 
     static int checkBed(List<String> currentTraffic, String guest) {
         int counter = 0;
-        //ha van hely
         if (currentTraffic.contains(null)) {
-            //nincs benne
             if (!currentTraffic.contains(guest)) {
                 currentTraffic.set(currentTraffic.indexOf(null), guest);
             } else {
-                //benne van mar
                 currentTraffic.set(currentTraffic.indexOf(guest), null);
             }
-            //ha nincs hely
         } else if (!currentTraffic.contains(null)) {
             if (currentTraffic.contains(guest)) {
                 currentTraffic.set(currentTraffic.indexOf(guest), null);
             } else {
-                //benne van mar
                 ++counter;
             }
         }
@@ -31,7 +26,7 @@ public class Main {
 
         List<List<String>> input = new ArrayList<>();
 
-        /////////////////////
+        //data
         List<String> inputLines1 = new ArrayList<>();
         inputLines1.add("2");
         inputLines1.add("ABBAJJKZKZ");
@@ -56,13 +51,8 @@ public class Main {
         inputLines5.add("0");
         input.add(inputLines5);
 
-        ///////////////////////Input transfer
-
-        String result = "";
-        ///belepunk a napba
-
         for (List<String> inputLines : input) {
-
+            String result;
             Integer availableBeds = Integer.parseInt(inputLines.get(0));
 
             if (inputLines.size() < 2) {
@@ -71,21 +61,36 @@ public class Main {
             String guestList = inputLines.get(1);
 
             String[] beds = new String[availableBeds];
-            int missedGuest = 0;
+
 
             List<String> currentTraffic = Arrays.asList(beds);
 
+            int missedGuest = 0;
+            List<String> leftGuests = new ArrayList<>();
+
             for (int i = 0; i < guestList.length(); i++) {
+
                 String currentGuest = String.valueOf(guestList.charAt(i));
-                missedGuest += checkBed(currentTraffic, currentGuest);
-                System.out.println(missedGuest);
+                if (leftGuests.contains(currentGuest)) continue;
+                int actualLeftGuest = checkBed(currentTraffic, currentGuest);
+                if (actualLeftGuest != 0) {
+                    ++missedGuest;
+                    leftGuests.add(currentGuest);
+                }
             }
+
+            if (missedGuest != 0) {
+                result = missedGuest + " customer(s) walked away.";
+            } else {
+                result = "All customers tanned successfully.";
+            }
+            System.out.println(result);
         }
     }
 }
 
-
 /*
+//to emulator, e.g. https://techiedelight.com/compiler/
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
